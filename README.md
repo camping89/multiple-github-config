@@ -93,6 +93,8 @@ Host github.com
     User git
     IdentityFile ~/.ssh/personal_github
     IdentitiesOnly yes
+    AddKeysToAgent yes
+    UseKeychain yes
 
 # Work GitHub account
 Host github.com-work
@@ -100,6 +102,8 @@ Host github.com-work
     User git
     IdentityFile ~/.ssh/work_github
     IdentitiesOnly yes
+    AddKeysToAgent yes
+    UseKeychain yes
 
 # Another GitHub account
 Host github.com-another
@@ -107,7 +111,27 @@ Host github.com-another
     User git
     IdentityFile ~/.ssh/another_github
     IdentitiesOnly yes
+    AddKeysToAgent yes
+    UseKeychain yes
 ```
+
+#### Understanding SSH Config Options
+
+Each option in the SSH config serves a specific purpose:
+
+- **Host**: The alias you'll use in git commands. This is what differs between your accounts. Use `github.com` for your primary account and custom names like `github.com-work` for additional accounts.
+
+- **HostName**: The actual server address you're connecting to. For GitHub, this is always `github.com`.
+
+- **User**: The username for SSH authentication to GitHub. This is always `git` for all GitHub accounts.
+
+- **IdentityFile**: Path to your private SSH key for this specific account.
+
+- **IdentitiesOnly**: When set to `yes`, forces SSH to only use the specified identity file for this host. This is critical for preventing authentication confusion when you have multiple keys.
+
+- **AddKeysToAgent**: When set to `yes`, automatically adds the key to the SSH agent when used.
+
+- **UseKeychain**: macOS specific option that allows storing your passphrase in the keychain (not needed on Linux).
 
 Test your SSH connections:
 
@@ -184,7 +208,7 @@ git config user.email "appropriate@email.com"
 
 This repository includes:
 
-- `ssh_config_sample`: Example SSH config file
+- `ssh_config_sample`: Example SSH config file with detailed explanations
 - `setup.sh`: Interactive setup script
 - `git-account`: Helper script to switch between accounts in any repository
 
@@ -193,5 +217,7 @@ This repository includes:
 - **Wrong account being used?** Check your remote URL with `git remote -v` and ensure it matches the correct Host in your SSH config
 - **Permission denied?** Verify your SSH key is added to the correct GitHub account
 - **SSH connection issues?** Test with verbose output: `ssh -vT git@github.com-work`
+- **Key authentication failures?** Make sure `IdentitiesOnly yes` is set in your SSH config to prevent trying other keys
+- **Changes attributed to wrong user?** Verify repository-specific git config with `git config --list` in the repository directory
 
 By following these steps, you can seamlessly work with multiple GitHub accounts on a single machine.
