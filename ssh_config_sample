@@ -24,12 +24,3 @@ Host github.com-another
     IdentitiesOnly yes
     AddKeysToAgent yes
     UseKeychain yes
-
-# Example with real-world name (replace with your actual account alias)
-Host github.com-fdt
-    HostName github.com
-    User git
-    IdentityFile ~/.ssh/fdt
-    IdentitiesOnly yes
-    AddKeysToAgent yes
-    UseKeychain yes
