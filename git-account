@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# Help text
+if [ "$1" == "-h" ] || [ "$1" == "--help" ] || [ $# -eq 0 ]; then
+  echo "Usage: git-account <account-name> [<email>]"
+  echo ""
+  echo "Sets the local git repository user name and email"
+  echo ""
+  echo "Arguments:"
+  echo "  account-name   Name of the account (e.g., personal, work)"
+  echo "  email          Optional: Email to use (if not provided, will use previously set email)"
+  echo ""
+  exit 0
+fi
+
+# Set git config for the repository
+ACCOUNT=$1
+EMAIL=$2
+
+if [ -z "$EMAIL" ]; then
+  git config user.name "$ACCOUNT"
+  echo "Set user.name to $ACCOUNT"
+  echo "Email unchanged"
+else
+  git config user.name "$ACCOUNT"
+  git config user.email "$EMAIL"
+  echo "Set user.name to $ACCOUNT"
+  echo "Set user.email to $EMAIL"
+fi
+
+# Show current config
+echo ""
+echo "Current repository git config:"
+echo "user.name: $(git config user.name)"
+echo "user.email: $(git config user.email)"
+echo ""
+echo "To verify origin, check:"
+echo "$(git remote -v)"

@@ -1,0 +1,35 @@
+# Personal GitHub account (default)
+Host github.com
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/personal_github
+    IdentitiesOnly yes
+    AddKeysToAgent yes
+    UseKeychain yes
+
+# Work GitHub account
+Host github.com-work
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/work_github
+    IdentitiesOnly yes
+    AddKeysToAgent yes
+    UseKeychain yes
+
+# Another GitHub account
+Host github.com-another
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/another_github
+    IdentitiesOnly yes
+    AddKeysToAgent yes
+    UseKeychain yes
+
+# Example with real-world name (replace with your actual account alias)
+Host github.com-fdt
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/fdt
+    IdentitiesOnly yes
+    AddKeysToAgent yes
+    UseKeychain yes
